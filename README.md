@@ -262,8 +262,7 @@ resource "aws_eip" "ip_elastica_Bal" {
 
  ## 2. Mostrar las ip públicas de cada máquina | output.tf:
 
-
-# Mostramos la IP pública de las instancias:
+Mostramos la **IP pública** de las instancias:
 
 ```
 output "elastic_ip_f1" {
