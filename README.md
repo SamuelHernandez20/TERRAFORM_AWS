@@ -39,16 +39,18 @@ resource "aws_security_group" "Grupo_Backend" {
   description = var.Group_description_Backend
 }
 ```
+```
 resource "aws_security_group" "Grupo_NFS" {
   name        = var.Group_name_NFS
   description = var.Group_description_NFS
 }
-
+```
+```
 resource "aws_security_group" "Grupo_Balanceador" {
   name        = var.Group_name_Balanceador
   description = var.Group_description_Balanceador
 }
-
+```
 
 # Creación de las reglas de entrada de los grupos de seguridad:
 #--------------------------------------------------------------------------
