@@ -13,3 +13,4 @@ A continuación muestro la estructura de los scripts de **automatización**:
     │   ├── variables.tf
 
 ```
+ ## 1. Creación de los grupos de seguridad:
