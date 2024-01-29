@@ -13,7 +13,7 @@ A continuación muestro la estructura de los scripts de **automatización**:
     │   ├── variables.tf
 
 ```
- ## 1. Desde el script del main.tf:
+ ## 1. Grupos de Seguridad | main.tf:
  
 ```
 # Configuramos el proveedor de AWS
@@ -174,8 +174,9 @@ resource "aws_security_group_rule" "egress_NFS" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 ```
-# Creación de las instancias [Frontends, Backend, NFS y Balanceador]:
-
+ ## 1.1 Creación de las instancias [Frontends, Backend, NFS y Balanceador] | main.tf:
+ 
+```
 resource "aws_instance" "instancia_del_Frontend01" {
   ami             = var.ami_id
   instance_type   = var.instance_type
@@ -186,7 +187,8 @@ resource "aws_instance" "instancia_del_Frontend01" {
     Name = var.instances_names[0]
   }
 }
-
+```
+```
 resource "aws_instance" "instancia_del_Frontend02" {
   ami             = var.ami_id
   instance_type   = var.instance_type
@@ -197,7 +199,8 @@ resource "aws_instance" "instancia_del_Frontend02" {
     Name = var.instances_names[1]
   }
 }
-
+```
+```
 resource "aws_instance" "instancia_del_Backend" {
   ami             = var.ami_id
   instance_type   = var.instance_type
@@ -208,7 +211,8 @@ resource "aws_instance" "instancia_del_Backend" {
     Name = var.instances_names[2]
   }
 }
-
+```
+```
 resource "aws_instance" "instancia_del_NFS" {
   ami             = var.ami_id
   instance_type   = var.instance_type
@@ -219,7 +223,8 @@ resource "aws_instance" "instancia_del_NFS" {
     Name = var.instances_names[3]
   }
 }
-
+```
+```
 resource "aws_instance" "instancia_del_Balanceador" {
   ami             = var.ami_id
   instance_type   = var.instance_type
@@ -230,20 +235,26 @@ resource "aws_instance" "instancia_del_Balanceador" {
     Name = var.instances_names[4]
   }
 }
+```
+
 # Creación y asociación de la IP elástica a las instancias [Frontends, NFS y Balanceador]:
 
+```
 resource "aws_eip" "ip_elastica_f1" {
   instance = aws_instance.instancia_del_Frontend01.id
 }
-
+```
+```
 resource "aws_eip" "ip_elastica_f2" {
   instance = aws_instance.instancia_del_Frontend02.id
 }
-
+```
+```
 resource "aws_eip" "ip_elastica_NFS" {
   instance = aws_instance.instancia_del_NFS.id
 }
-
+```
+```
 resource "aws_eip" "ip_elastica_Bal" {
   instance = aws_instance.instancia_del_Balanceador.id
 }
