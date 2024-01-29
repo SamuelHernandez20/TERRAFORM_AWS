@@ -13,7 +13,8 @@ A continuación muestro la estructura de los scripts de **automatización**:
     │   ├── variables.tf
 
 ```
-
+ ## 1. Desde el script del main.tf:
+ 
 ```
 # Configuramos el proveedor de AWS
 provider "aws" {
@@ -22,19 +23,22 @@ provider "aws" {
   secret_key = var.clave_secreta
   token      = var.token
 }
+```
 
-# Creación de los grupos de seguridad [Frontends, Backend, NFS y Balanceador]:
+Creación de los grupos de seguridad [Frontends, Backend, NFS y Balanceador]:
 
+```
 resource "aws_security_group" "Grupo_frontend" {
   name        = var.Group_name_Frontends
   description = var.Group_description_Frontends
 }
-
+```
+```
 resource "aws_security_group" "Grupo_Backend" {
   name        = var.Group_name_Backend
   description = var.Group_description_Backend
 }
-
+```
 resource "aws_security_group" "Grupo_NFS" {
   name        = var.Group_name_NFS
   description = var.Group_description_NFS
