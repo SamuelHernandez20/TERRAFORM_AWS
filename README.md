@@ -237,7 +237,7 @@ resource "aws_instance" "instancia_del_Balanceador" {
 }
 ```
 
-# Creación y asociación de la IP elástica a las instancias [Frontends, NFS y Balanceador]:
+ ## 1.2 Creación y asociación de la IP elástica a las instancias [Frontends, NFS y Balanceador] | main.tf:
 
 ```
 resource "aws_eip" "ip_elastica_f1" {
