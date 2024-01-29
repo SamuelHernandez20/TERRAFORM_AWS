@@ -52,10 +52,9 @@ resource "aws_security_group" "Grupo_Balanceador" {
 }
 ```
 
-# Creación de las reglas de entrada de los grupos de seguridad:
-#--------------------------------------------------------------------------
-# Reglas de entrada para los frontales:
-
+Creación de las reglas de entrada de los grupos de seguridad.
+**Reglas de entrada para los frontales**:
+```
 resource "aws_security_group_rule" "ingress_frontends" {
   security_group_id = aws_security_group.Grupo_frontend.id
   type              = "ingress" # <- Se define el tipo entrada
@@ -67,9 +66,11 @@ resource "aws_security_group_rule" "ingress_frontends" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
+```
 
-# Reglas de entrada para el Backend:
+Reglas de entrada para el **Backend**:
 
+```
 resource "aws_security_group_rule" "ingress_backend" {
   security_group_id = aws_security_group.Grupo_Backend.id
   type              = "ingress"
@@ -81,9 +82,10 @@ resource "aws_security_group_rule" "ingress_backend" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
+```
+Reglas de entrada para el **NFS**:
 
-# Reglas de entrada para el NFS:
-
+```
 resource "aws_security_group_rule" "ingress_NFS" {
   security_group_id = aws_security_group.Grupo_NFS.id
   type              = "ingress"
@@ -95,9 +97,11 @@ resource "aws_security_group_rule" "ingress_NFS" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
+```
 
-# Reglas de entrada para el Balanceador:
+Reglas de entrada para el **Balanceador**:
 
+```
 resource "aws_security_group_rule" "ingress_balanceador" {
   security_group_id = aws_security_group.Grupo_Balanceador.id
   type              = "ingress"
@@ -109,12 +113,12 @@ resource "aws_security_group_rule" "ingress_balanceador" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
-# Creación de las reglas de salida de los grupos de seguridad:
-#--------------------------------------------------------------------------
+```
+Creación de las reglas de salida de los grupos de seguridad:
 
-# Creamos las reglas de salida del grupo de seguridad:
+Creamos las reglas de salida del grupo de seguridad del **frontend**:
 
-
+```
 resource "aws_security_group_rule" "egress_frontend" {
   security_group_id = aws_security_group.Grupo_frontend.id
 
@@ -125,8 +129,11 @@ resource "aws_security_group_rule" "egress_frontend" {
   protocol    = "-1" # <- El valor -1 indica que esta regla se aplica a cualquier protocolo.
   cidr_blocks = ["0.0.0.0/0"]
 }
+```
 
+Creamos las reglas de salida del grupo de seguridad del **backend**:
 
+```
 resource "aws_security_group_rule" "egress_backend" {
   security_group_id = aws_security_group.Grupo_Backend.id
 
@@ -137,7 +144,11 @@ resource "aws_security_group_rule" "egress_backend" {
   protocol    = "-1"
   cidr_blocks = ["0.0.0.0/0"]
 }
+```
 
+Creamos las reglas de salida del grupo de seguridad del **balanceador**:
+
+```
 resource "aws_security_group_rule" "egress_balanceador" {
   security_group_id = aws_security_group.Grupo_Balanceador.id
 
@@ -148,7 +159,10 @@ resource "aws_security_group_rule" "egress_balanceador" {
   protocol    = "-1"
   cidr_blocks = ["0.0.0.0/0"]
 }
+```
+Creamos las reglas de salida del grupo de seguridad del **NFS**:
 
+```
 resource "aws_security_group_rule" "egress_NFS" {
   security_group_id = aws_security_group.Grupo_NFS.id
 
@@ -159,8 +173,8 @@ resource "aws_security_group_rule" "egress_NFS" {
   protocol    = "-1"
   cidr_blocks = ["0.0.0.0/0"]
 }
-
-#Creación de las instancias [Frontends, Backend, NFS y Balanceador]:
+```
+# Creación de las instancias [Frontends, Backend, NFS y Balanceador]:
 
 resource "aws_instance" "instancia_del_Frontend01" {
   ami             = var.ami_id
